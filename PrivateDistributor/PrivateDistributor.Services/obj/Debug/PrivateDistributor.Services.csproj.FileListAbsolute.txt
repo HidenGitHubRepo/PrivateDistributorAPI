@@ -7,7 +7,6 @@ C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.S
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\Microsoft.Web.Infrastructure.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\Newtonsoft.Json.dll
-C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\PrivateDistributor.Data.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\System.Net.Http.Formatting.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\System.Spatial.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\System.Web.Helpers.dll
@@ -23,8 +22,6 @@ C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.S
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\System.Web.WebPages.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\System.Web.WebPages.Razor.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\WebGrease.dll
-C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\CodeFirst.Model.dll
-C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\PrivateDistributor.Data.pdb
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\EntityFramework.xml
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\Newtonsoft.Json.xml
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\System.Net.Http.Formatting.xml
@@ -41,7 +38,6 @@ C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.S
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\Microsoft.Data.Edm.xml
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\Microsoft.Data.OData.xml
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\System.Spatial.xml
-C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\CodeFirst.Model.pdb
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\de\Microsoft.Data.Edm.resources.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\es\Microsoft.Data.Edm.resources.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\fr\Microsoft.Data.Edm.resources.dll
