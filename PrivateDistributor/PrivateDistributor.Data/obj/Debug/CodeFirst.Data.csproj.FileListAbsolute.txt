@@ -1,0 +1,1 @@
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Data\obj\Debug\CodeFirst.Data.csprojResolveAssemblyReference.cache
