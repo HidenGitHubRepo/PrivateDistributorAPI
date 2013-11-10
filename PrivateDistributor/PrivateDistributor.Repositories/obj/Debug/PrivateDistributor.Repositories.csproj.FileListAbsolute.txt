@@ -1,0 +1,7 @@
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Repositories\obj\Debug\PrivateDistributor.Repositories.csprojResolveAssemblyReference.cache
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Repositories\bin\Debug\PrivateDistributor.Repositories.dll
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Repositories\bin\Debug\PrivateDistributor.Repositories.pdb
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Repositories\bin\Debug\EntityFramework.dll
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Repositories\bin\Debug\EntityFramework.xml
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Repositories\obj\Debug\PrivateDistributor.Repositories.dll
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Repositories\obj\Debug\PrivateDistributor.Repositories.pdb
