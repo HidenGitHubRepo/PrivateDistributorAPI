@@ -49,14 +49,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CodeFirst.Model\CodeFirst.Model.csproj">
-      <Project>{BDB5D5A4-7A23-4E83-B7CB-0EEE3D541D59}</Project>
-      <Name>CodeFirst.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeFirst.Model\CodeFirst.Model.csproj">
+      <Project>{94D659F8-35F6-4690-8AC7-F9727FA88C95}</Project>
+      <Name>CodeFirst.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

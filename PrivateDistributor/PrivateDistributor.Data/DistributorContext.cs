@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeFirst.Model;
-using Microsoft.Win32;
 
 namespace PrivateDistributor.Data
 {

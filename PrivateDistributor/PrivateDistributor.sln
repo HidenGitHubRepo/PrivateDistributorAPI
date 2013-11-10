@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFirst.Model", "CodeFirst.Model\CodeFirst.Model.csproj", "{BDB5D5A4-7A23-4E83-B7CB-0EEE3D541D59}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateDistributor.Repositories", "PrivateDistributor.Repositories\PrivateDistributor.Repositories.csproj", "{A98F276E-915D-4C3E-A4E0-4D2DFD22C817}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFirst.Data", "PrivateDistributor.Data\CodeFirst.Data.csproj", "{7A0E0577-A997-4683-9B29-A9FC73B5430E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrivateDistributor.Services", "PrivateDistributor.Services\PrivateDistributor.Services.csproj", "{C7AE7AE0-9F4A-4542-84BF-87841D5E2083}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFirst.Model", "CodeFirst.Model\CodeFirst.Model.csproj", "{94D659F8-35F6-4690-8AC7-F9727FA88C95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BDB5D5A4-7A23-4E83-B7CB-0EEE3D541D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDB5D5A4-7A23-4E83-B7CB-0EEE3D541D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDB5D5A4-7A23-4E83-B7CB-0EEE3D541D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDB5D5A4-7A23-4E83-B7CB-0EEE3D541D59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A98F276E-915D-4C3E-A4E0-4D2DFD22C817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A98F276E-915D-4C3E-A4E0-4D2DFD22C817}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A98F276E-915D-4C3E-A4E0-4D2DFD22C817}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,6 +27,10 @@ Global
 		{C7AE7AE0-9F4A-4542-84BF-87841D5E2083}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7AE7AE0-9F4A-4542-84BF-87841D5E2083}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7AE7AE0-9F4A-4542-84BF-87841D5E2083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94D659F8-35F6-4690-8AC7-F9727FA88C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94D659F8-35F6-4690-8AC7-F9727FA88C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94D659F8-35F6-4690-8AC7-F9727FA88C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94D659F8-35F6-4690-8AC7-F9727FA88C95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

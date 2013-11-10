@@ -26,7 +26,7 @@ namespace PrivateDistributor.Services
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<DistributorContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DistributorContext, Configuration>());
         }
     }
 }
