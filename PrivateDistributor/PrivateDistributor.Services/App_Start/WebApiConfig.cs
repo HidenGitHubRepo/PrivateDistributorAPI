@@ -10,6 +10,35 @@ namespace PrivateDistributor.Services
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
+               name: "UserApi",
+               routeTemplate: "api/users/{action}/{id}",
+               defaults: new
+               {
+                   controller = "users",
+                   id = RouteParameter.Optional
+               }
+            );
+
+            //config.Routes.MapHttpRoute(
+            //              name: "CarApi",
+            //              routeTemplate: "api/cars/{id}",
+            //              defaults: new
+            //              {
+            //                  controller = "cars"
+            //              }
+            //           );
+
+            config.Routes.MapHttpRoute(
+               name: "CarApi",
+               routeTemplate: "api/cars/{action}/{id}",
+               defaults: new
+               {
+                   controller = "cars",
+                   id = RouteParameter.Optional
+               }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

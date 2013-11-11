@@ -2,3 +2,4 @@ C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\CodeFirst.Model\bin\
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\CodeFirst.Model\bin\Debug\CodeFirst.Model.pdb
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\CodeFirst.Model\obj\Debug\CodeFirst.Model.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\CodeFirst.Model\obj\Debug\CodeFirst.Model.pdb
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\CodeFirst.Model\obj\Debug\CodeFirst.Model.csprojResolveAssemblyReference.cache

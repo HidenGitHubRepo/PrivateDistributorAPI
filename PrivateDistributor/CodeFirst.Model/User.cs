@@ -5,11 +5,6 @@ namespace CodeFirst.Model
 {
     public class User
     {
-        public User()
-        {
-            this.Cars = new HashSet<Car>();
-        }
-
         public int Id { get; set; }
 
         [Required]
@@ -19,7 +14,7 @@ namespace CodeFirst.Model
         public string Username { get; set; }
 
         [Required]
-        [MinLength(6)]
+        [MinLength(1)]
         [MaxLength(30)]
         [StringLength(30)]
         public string DisplayName { get; set; }
@@ -36,14 +31,23 @@ namespace CodeFirst.Model
 
         public UserType UserType { get; set; }
 
-        public string Mail { get; set; }
-        public string АdditionalMail { get; set; }
-        
-        public string Phone { get; set; }
-        public string АdditionalPhone { get; set; }
+
+        public ICollection<string> Mails { get; set; }
+        public ICollection<string> Phones { get; set; }
+        public ICollection<string> MoreContacts { get; set; }
 
         public string Location { get; set; }
 
-        public virtual ICollection<Car> Cars { get; set; } 
+        public virtual Company Company { get; set; }
+
+        public virtual ICollection<Car> Cars { get; set; }
+
+        public User()
+        {
+            this.Cars = new HashSet<Car>();
+            this.Mails = new HashSet<string>();
+            this.Phones = new HashSet<string>();
+            this.MoreContacts = new HashSet<string>();
+        }
     } 
 }

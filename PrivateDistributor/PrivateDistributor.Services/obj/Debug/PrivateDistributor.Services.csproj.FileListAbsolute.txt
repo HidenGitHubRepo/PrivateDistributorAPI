@@ -68,3 +68,9 @@ C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.S
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\obj\Debug\PrivateDistributor.Services.csprojResolveAssemblyReference.cache
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\obj\Debug\PrivateDistributor.Services.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\obj\Debug\PrivateDistributor.Services.pdb
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\CodeFirst.Model.dll
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\PrivateDistributor.Data.dll
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\PrivateDistributor.Repositories.dll
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\CodeFirst.Model.pdb
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\PrivateDistributor.Data.pdb
+C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Services\bin\PrivateDistributor.Repositories.pdb
