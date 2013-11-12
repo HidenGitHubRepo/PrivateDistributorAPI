@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeFirst.Model
 {
-    public class Products
+    public class Product
     {
         public int Id { get; set; }
 

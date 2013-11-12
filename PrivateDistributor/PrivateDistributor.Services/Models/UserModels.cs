@@ -6,6 +6,36 @@ using CodeFirst.Model;
 
 namespace PrivateDistributor.Services.Models
 {
+    public class NewUserAuthCodeRequestModel
+    {
+        public string AuthCode { get; set; }
+    }
+
+    [DataContract]
+    public class NewUserAuthCodeResponseModel
+    {
+        public static Func<NewUserAuthCode, NewUserAuthCodeResponseModel> FromEntity { get; set; }
+
+        [DataMember(Name = "Email")]
+        public string Email { get; set; }
+
+        [DataMember(Name = "Type")]
+        public string Type { get; set; }
+
+        [DataMember(Name = "Company")]
+        public string Company { get; set; }
+
+        static NewUserAuthCodeResponseModel()
+        {
+            FromEntity = x => new NewUserAuthCodeResponseModel 
+            {
+                Email = x.Email,
+                Company = x.Company.Name,
+                Type = x.Type.ToString()
+            };
+        }
+    }
+    
     public class UserRegisterRequestModel
     {
         public static Func<UserRegisterRequestModel, User> ToEntity { get; set; }
@@ -28,24 +58,26 @@ namespace PrivateDistributor.Services.Models
         {
             ToEntity = x => new User
             {
-                Username = x.Username, DisplayName = x.DisplayName, 
-                AuthCode = x.AuthCode, UserType = x.UserType, 
+                Username = x.Username, 
+                DisplayName = x.DisplayName, 
+                AuthCode = x.AuthCode, 
+                UserType = x.UserType, 
                 Mails = x.Mails, 
                 Phones = x.Phones,
                 Location = x.Location
             };
         }
     }
-
+    
     [DataContract]
     public class UserRegisterResponseModel
     {
         public static Func<User, UserRegisterResponseModel> FromEntity { get; set; }
 
-        [DataMember(Name = "displayName")]
+        [DataMember(Name = "DisplayName")]
         public string DisplayName { get; set; }
 
-        [DataMember(Name = "sessionKey")]
+        [DataMember(Name = "SessionKey")]
         public string SessionKey { get; set; }
 
         static UserRegisterResponseModel()

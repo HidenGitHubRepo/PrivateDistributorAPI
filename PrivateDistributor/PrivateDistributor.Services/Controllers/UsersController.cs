@@ -117,6 +117,64 @@ namespace PrivateDistributor.Services.Controllers
         }
 
         [HttpPost]
+        [ActionName("authCodeCheck")]
+        public HttpResponseMessage IsNewUserAuthCodeАuthentic([FromBody] NewUserAuthCodeRequestModel codeModel)
+        {
+            var responseMessage = this.TryExecuteOperation(() =>
+            {
+                if (codeModel.AuthCode.Contains('@'))
+                {
+                    var userRepositoryCount =
+                        this.unitOfWork.userRepository.All().Count();
+
+                    if (userRepositoryCount == 0)
+                    {
+                        var firstUser = this.unitOfWork.newUserAuthCodeRepository.All()
+                                            .FirstOrDefault();
+                        if (firstUser == null)
+                        {
+                            firstUser = new NewUserAuthCode()
+                            {
+                                AuthCode = SessionGenerator.GenerateSessionKey(0),
+                                Email = codeModel.AuthCode,
+                                Company = new Company() { DisplayName = "Administrator" },
+                                Type = UserType.Administrator
+                            };
+                            this.unitOfWork.newUserAuthCodeRepository.Add(firstUser);
+                        }
+
+                        return this.Request.CreateResponse(HttpStatusCode.Created,
+                            NewUserAuthCodeResponseModel.FromEntity(firstUser));
+                    }
+                    else 
+                    {
+                        throw new InvalidOperationException("The program has been already initiated!");
+                    }
+                }
+
+                var doesCodeExist =
+                    this.unitOfWork.newUserAuthCodeRepository.All()
+                          .FirstOrDefault(
+                                          x =>
+                                          x.AuthCode.ToLower() == codeModel.AuthCode.ToLower());
+                if (doesCodeExist == null)
+                {
+                    throw new InvalidOperationException("The Authification code is wrong!");
+                }
+                else if (doesCodeExist.IsUsed == true)
+                {
+                    throw new InvalidOperationException("The Authification code is already used!");
+                }
+
+                return this.Request.CreateResponse(HttpStatusCode.Created, 
+                    NewUserAuthCodeResponseModel.FromEntity(doesCodeExist));
+            });
+
+            return responseMessage;
+        }
+
+
+        [HttpPost]
         [ActionName("register")]
         public HttpResponseMessage Register([FromBody] UserRegisterRequestModel userModel)
         {

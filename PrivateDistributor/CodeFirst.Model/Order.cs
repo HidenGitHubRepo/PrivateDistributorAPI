@@ -10,7 +10,7 @@ namespace CodeFirst.Model
     {
         public int Id { get; set; }
 
-        public virtual Products Product { get; set; }
+        public virtual Product Product { get; set; }
         public int Count { get; set; }
 
 

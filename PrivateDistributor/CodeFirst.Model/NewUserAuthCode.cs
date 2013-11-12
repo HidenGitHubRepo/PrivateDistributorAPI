@@ -12,23 +12,21 @@ namespace CodeFirst.Model
         [Required]
         public string Email { get; set; }
 
-        public bool IsUsed { get; set; }
-
-        [Required]
-        [MinLength(1)]
-        [MaxLength(12)]
-        [StringLength(12)]
-        public virtual User AuthCodeCreator { get; set; }
-
-        public virtual User NewUser { get; set; }
-        
         [MinLength(40)]
         [MaxLength(40)]
         [StringLength(40)]
         public string AuthCode { get; set; }
 
+        public bool IsUsed { get; set; }
+
+
+        public virtual User AuthCodeCreator { get; set; }
+
+        public virtual User NewUser { get; set; }
+        
+
         public virtual Company Company { get; set; }
-        public virtual Type Type { get; set; }
+        public UserType Type { get; set; }
 
         public NewUserAuthCode()
         {
