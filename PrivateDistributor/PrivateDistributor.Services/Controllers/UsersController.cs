@@ -35,7 +35,7 @@ namespace PrivateDistributor.Services.Controllers
                 {
                     Id = x.Id,
                     Username = x.Username,
-                    DisplayName = x.DisplayName,
+                    DisplayName = x.LastName,
                     Location = x.Location,
                     Mails = x.Mails,
                     Phones = x.Phones,
@@ -66,7 +66,7 @@ namespace PrivateDistributor.Services.Controllers
                 {
                     Id = selectedUser.Id,
                     Username = selectedUser.Username,
-                    DisplayName = selectedUser.DisplayName,
+                    DisplayName = selectedUser.LastName,
                     Location = selectedUser.Location,
                     Mails = selectedUser.Mails,
                     Phones = selectedUser.Phones,
@@ -117,46 +117,19 @@ namespace PrivateDistributor.Services.Controllers
         }
 
         [HttpPost]
-        [ActionName("authCodeCheck")]
-        public HttpResponseMessage IsNewUserAuthCodeАuthentic([FromBody] NewUserAuthCodeRequestModel codeModel)
+        [ActionName("register")]
+        public HttpResponseMessage Register([FromBody] UserRegisterRequestModel userModel)
         {
             var responseMessage = this.TryExecuteOperation(() =>
             {
-                if (codeModel.AuthCode.Contains('@'))
-                {
-                    var userRepositoryCount =
-                        this.unitOfWork.userRepository.All().Count();
-
-                    if (userRepositoryCount == 0)
-                    {
-                        var firstUser = this.unitOfWork.newUserAuthCodeRepository.All()
-                                            .FirstOrDefault();
-                        if (firstUser == null)
-                        {
-                            firstUser = new NewUserAuthCode()
-                            {
-                                AuthCode = SessionGenerator.GenerateSessionKey(0),
-                                Email = codeModel.AuthCode,
-                                Company = new Company() { DisplayName = "Administrator" },
-                                Type = UserType.Administrator
-                            };
-                            this.unitOfWork.newUserAuthCodeRepository.Add(firstUser);
-                        }
-
-                        return this.Request.CreateResponse(HttpStatusCode.Created,
-                            NewUserAuthCodeResponseModel.FromEntity(firstUser));
-                    }
-                    else 
-                    {
-                        throw new InvalidOperationException("The program has been already initiated!");
-                    }
-                }
+                UserValidator.ValidateAuthCode(userModel.RegistrationAuthCode);
 
                 var doesCodeExist =
-                    this.unitOfWork.newUserAuthCodeRepository.All()
-                          .FirstOrDefault(
-                                          x =>
-                                          x.AuthCode.ToLower() == codeModel.AuthCode.ToLower());
+                        this.unitOfWork.newUserAuthCodeRepository.All()
+                        .FirstOrDefault(
+                                        x =>
+                                        x.AuthCode == userModel.RegistrationAuthCode);
+
                 if (doesCodeExist == null)
                 {
                     throw new InvalidOperationException("The Authification code is wrong!");
@@ -166,43 +139,62 @@ namespace PrivateDistributor.Services.Controllers
                     throw new InvalidOperationException("The Authification code is already used!");
                 }
 
-                return this.Request.CreateResponse(HttpStatusCode.Created, 
-                    NewUserAuthCodeResponseModel.FromEntity(doesCodeExist));
-            });
 
-            return responseMessage;
-        }
-
-
-        [HttpPost]
-        [ActionName("register")]
-        public HttpResponseMessage Register([FromBody] UserRegisterRequestModel userModel)
-        {
-            var responseMessage = this.TryExecuteOperation(() =>
-            {
                 User user = UserRegisterRequestModel.ToEntity(userModel);
-                UserValidator.ValidateUsername(user.Username);
-                UserValidator.ValidateNickname(user.DisplayName);
-                UserValidator.ValidateAuthCode(user.AuthCode);
+                user.Username = doesCodeExist.Email;
+                user.UserType = doesCodeExist.Type;
+
+                if (user.UserType == UserType.Administrator)
+                {
+                    var isFirstAdminUser = this.unitOfWork.userRepository.All()
+                              .FirstOrDefault(
+                                              x =>
+                                              x.UserType == UserType.Administrator);
+                    if (isFirstAdminUser == null)
+                    {
+                        Company newCompany = new Company()
+                        {
+                            DisplayName = userModel.Company,
+                            Name = userModel.Company
+                        };
+                        unitOfWork.companyRepository.Add(newCompany);
+                        user.Company = newCompany;
+                    }
+                    else
+                    {
+                        user.Company = isFirstAdminUser.Company;
+                    }
+                }
+                else
+                {
+                    user.Company = doesCodeExist.Company;
+                }
+
+                UserValidator.ValidateEmail(user.Username);
+                UserValidator.ValidateName(user.FirstName);
+                UserValidator.ValidateName(user.SecondName);
+                UserValidator.ValidateName(user.LastName);
 
                 var doesUserExist =
                     this.unitOfWork.userRepository.All()
                               .FirstOrDefault(
                                               x =>
-                                              x.Username.ToLower() == user.Username.ToLower() ||
-                                              x.DisplayName.ToLower() == user.DisplayName.ToLower());
+                                              x.Username.ToLower() == user.Username.ToLower());
+                                              //||
+                                              //x.DisplayName.ToLower() == user.DisplayName.ToLower());
                 if (doesUserExist != null)
                 {
                     throw new InvalidOperationException("User already exist in the database!");
                 }
 
                 //register all new users as clients
-                user.UserType = UserType.Client;
+                //user.UserType = UserType.Client;
                 this.unitOfWork.userRepository.Add(user);
                 user.SessionKey = SessionGenerator.GenerateSessionKey(user.Id);
                 this.unitOfWork.userRepository.Update(user.Id, user);
 
-                return this.Request.CreateResponse(HttpStatusCode.Created, UserRegisterResponseModel.FromEntity(user));
+                var response = this.Request.CreateResponse(HttpStatusCode.Created, UserRegisterResponseModel.FromEntity(user));
+                return response;
             });
 
             return responseMessage;

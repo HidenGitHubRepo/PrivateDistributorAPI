@@ -17,11 +17,23 @@ namespace CodeFirst.Model
         [MinLength(1)]
         [MaxLength(30)]
         [StringLength(30)]
-        public string DisplayName { get; set; }
+        public string FirstName { get; set; }
 
-        [MinLength(40)]
-        [MaxLength(40)]
-        [StringLength(40)]
+        [Required]
+        [MinLength(1)]
+        [MaxLength(30)]
+        [StringLength(30)]
+        public string SecondName { get; set; }
+
+        [Required]
+        [MinLength(1)]
+        [MaxLength(30)]
+        [StringLength(30)]
+        public string LastName { get; set; }
+
+        //[MinLength(40)]
+        //[MaxLength(40)]
+        [StringLength(250)]
         public string AuthCode { get; set; }
 
         [MinLength(50)]

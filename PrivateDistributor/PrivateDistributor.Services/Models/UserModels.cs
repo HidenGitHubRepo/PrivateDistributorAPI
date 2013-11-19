@@ -6,9 +6,66 @@ using CodeFirst.Model;
 
 namespace PrivateDistributor.Services.Models
 {
+    public class MakeNewUserAuthCodeRequestModel
+    {
+        [DataMember(Name = "AuthCode")]
+        public string AuthCode { get; set; }
+
+        [DataMember(Name = "Email")]
+        public string Email { get; set; }
+
+        [DataMember(Name = "Type")]
+        public string Type { get; set; }
+
+        [DataMember(Name = "Company")]
+        public string Company { get; set; }
+    }
+
+    [DataContract]
+    public class MakeNewUserAuthCodeResponseModel
+    {
+        public static Func<NewUserAuthCode, MakeNewUserAuthCodeResponseModel> FromEntity { get; set; }
+
+        [DataMember(Name = "Email")]
+        public string Email { get; set; }
+
+        [DataMember(Name = "Type")]
+        public string Type { get; set; }
+
+        [DataMember(Name = "Company")]
+        public string Company { get; set; }
+
+        [DataMember(Name = "AuthCodeCreator")]
+        public string AuthCodeCreator { get; set; }
+
+        [DataMember(Name = "AuthCode")]
+        public string AuthCode { get; set; }
+
+        static MakeNewUserAuthCodeResponseModel()
+        {
+            FromEntity = x => new MakeNewUserAuthCodeResponseModel
+            {
+                Email = x.Email,
+                Company = x.Company.Name,
+                Type = x.Type.ToString(),
+                AuthCodeCreator = x.AuthCodeCreator.LastName
+            };
+        }
+    }
+    
     public class NewUserAuthCodeRequestModel
     {
+        [DataMember(Name = "AuthCode")]
         public string AuthCode { get; set; }
+
+        [DataMember(Name = "Email")]
+        public string Email { get; set; }
+
+        [DataMember(Name = "Type")]
+        public string Type { get; set; }
+
+        [DataMember(Name = "Company")]
+        public string Company { get; set; }
     }
 
     [DataContract]
@@ -25,13 +82,17 @@ namespace PrivateDistributor.Services.Models
         [DataMember(Name = "Company")]
         public string Company { get; set; }
 
+        [DataMember(Name = "AuthCode")]
+        public string AuthCode { get; set; }
+
         static NewUserAuthCodeResponseModel()
         {
             FromEntity = x => new NewUserAuthCodeResponseModel 
             {
                 Email = x.Email,
                 Company = x.Company.Name,
-                Type = x.Type.ToString()
+                Type = x.Type.ToString(),
+                AuthCode = x.AuthCode
             };
         }
     }
@@ -42,9 +103,15 @@ namespace PrivateDistributor.Services.Models
 
         public string Username { get; set; }
 
-        public string DisplayName { get; set; }
+        public string FirstName { get; set; }
+
+        public string SecondName { get; set; }
+
+        public string LastName { get; set; }
 
         public string AuthCode { get; set; }
+
+        public string RegistrationAuthCode { get; set; }
 
         public ICollection<string> Mails { get; set; }
 
@@ -54,12 +121,16 @@ namespace PrivateDistributor.Services.Models
 
         public UserType UserType { get; set; }
 
+        public string Company { get; set; }
+
         static UserRegisterRequestModel()
         {
             ToEntity = x => new User
             {
-                Username = x.Username, 
-                DisplayName = x.DisplayName, 
+                Username = x.Username,
+                FirstName = x.FirstName,
+                SecondName = x.SecondName,
+                LastName = x.LastName, 
                 AuthCode = x.AuthCode, 
                 UserType = x.UserType, 
                 Mails = x.Mails, 
@@ -74,15 +145,23 @@ namespace PrivateDistributor.Services.Models
     {
         public static Func<User, UserRegisterResponseModel> FromEntity { get; set; }
 
-        [DataMember(Name = "DisplayName")]
-        public string DisplayName { get; set; }
+        [DataMember(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [DataMember(Name = "LastName")]
+        public string LastName { get; set; }
 
         [DataMember(Name = "SessionKey")]
         public string SessionKey { get; set; }
 
         static UserRegisterResponseModel()
         {
-            FromEntity = x => new UserRegisterResponseModel { DisplayName = x.DisplayName, SessionKey = x.SessionKey, };
+            FromEntity = x => new UserRegisterResponseModel 
+            {
+                FirstName = x.FirstName, 
+                LastName = x.LastName, 
+                SessionKey = x.SessionKey, 
+            };
         }
     }
 
@@ -118,7 +197,7 @@ namespace PrivateDistributor.Services.Models
 
         static UserLoginResponseModel()
         {
-            FromEntity = x => new UserLoginResponseModel { DisplayName = x.DisplayName, SessionKey = x.SessionKey, UserType = x.UserType };
+            FromEntity = x => new UserLoginResponseModel { DisplayName = x.LastName, SessionKey = x.SessionKey, UserType = x.UserType };
         }
     }
 

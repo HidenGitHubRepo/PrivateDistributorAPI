@@ -8,3 +8,13 @@ C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.D
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Data\bin\Debug\CodeFirst.Model.dll
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Data\bin\Debug\CodeFirst.Model.pdb
 C:\iOS\Project\API\PrivateDistributorAPI\PrivateDistributor\PrivateDistributor.Data\obj\Debug\CodeFirst.Data.csprojResolveAssemblyReference.cache
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\bin\Debug\PrivateDistributor.Data.dll.config
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\bin\Debug\PrivateDistributor.Data.dll
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\bin\Debug\PrivateDistributor.Data.pdb
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\bin\Debug\CodeFirst.Model.dll
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\bin\Debug\EntityFramework.dll
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\bin\Debug\CodeFirst.Model.pdb
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\bin\Debug\EntityFramework.xml
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\obj\Debug\CodeFirst.Data.csprojResolveAssemblyReference.cache
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\obj\Debug\PrivateDistributor.Data.dll
+C:\Users\VindicatorL\Desktop\iOS API\trunk\PrivateDistributor\PrivateDistributor.Data\obj\Debug\PrivateDistributor.Data.pdb

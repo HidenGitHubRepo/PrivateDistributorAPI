@@ -12,9 +12,9 @@ namespace CodeFirst.Model
         [Required]
         public string Email { get; set; }
 
-        [MinLength(40)]
-        [MaxLength(40)]
-        [StringLength(40)]
+        [MinLength(50)]
+        [MaxLength(50)]
+        [StringLength(50)]
         public string AuthCode { get; set; }
 
         public bool IsUsed { get; set; }

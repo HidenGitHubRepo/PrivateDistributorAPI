@@ -8,6 +8,8 @@ namespace CodeFirst.Model
     {
         Administrator,
         Dealer,
-        Client
+        ClientAdministrator,
+        Client,
+        Undefined
     }
 }

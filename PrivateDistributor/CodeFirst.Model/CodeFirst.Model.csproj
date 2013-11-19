@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Car.cs" />
     <Compile Include="Company.cs" />
+    <Compile Include="CompanyType.cs" />
     <Compile Include="Extra.cs" />
     <Compile Include="NewUserAuthCode.cs" />
     <Compile Include="Order.cs" />
