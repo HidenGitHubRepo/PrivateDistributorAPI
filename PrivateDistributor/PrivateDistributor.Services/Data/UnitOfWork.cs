@@ -16,6 +16,8 @@ namespace PrivateDistributor.Services.Data
         public IRepository<NewUserAuthCode> newUserAuthCodeRepository { get; private set; }
         public IRepository<Product> productRepository { get; private set; }
         public IRepository<Order> orderRepository { get; private set; }
+        public IRepository<Phone> phoneRepository { get; private set; }
+        public IRepository<Email> emailRepository { get; private set; }
         private bool disposed = false;
 
         public UnitOfWork()
@@ -28,6 +30,8 @@ namespace PrivateDistributor.Services.Data
             this.newUserAuthCodeRepository  = new EfRepository<NewUserAuthCode             >(this.context);
             this.productRepository          = new EfRepository<Product                     >(this.context);
             this.orderRepository            = new EfRepository<Order                       >(this.context);
+            this.phoneRepository            = new EfRepository<Phone                       >(this.context);
+            this.emailRepository            = new EfRepository<Email                       >(this.context);
         }
 
         public void Save()

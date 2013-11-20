@@ -101,6 +101,8 @@ namespace PrivateDistributor.Services.Models
     {
         public static Func<UserRegisterRequestModel, User> ToEntity { get; set; }
 
+        public static Func<UserRegisterRequestModel, Company> ToEntityCompany { get; set; }
+
         public string Username { get; set; }
 
         public string FirstName { get; set; }
@@ -117,11 +119,21 @@ namespace PrivateDistributor.Services.Models
 
         public ICollection<string> Phones { get; set; }
 
-        public string Location { get; set; }
-
         public UserType UserType { get; set; }
 
-        public string Company { get; set; }
+        public string CompanyName { get; set; }
+
+        public string CompanyDisplayName { get; set; }
+
+        public string Fax { get; set; }
+
+        public string CompanyMoreInformation { get; set; }
+
+        public string CompanyLocation { get; set; }
+
+        public ICollection<string> CompanyMails { get; set; }
+
+        public ICollection<string> CompanyPhones { get; set; }
 
         static UserRegisterRequestModel()
         {
@@ -132,35 +144,129 @@ namespace PrivateDistributor.Services.Models
                 SecondName = x.SecondName,
                 LastName = x.LastName, 
                 AuthCode = x.AuthCode, 
-                UserType = x.UserType, 
-                Mails = x.Mails, 
-                Phones = x.Phones,
-                Location = x.Location
+                UserType = x.UserType
+                //,
+                //Location = x.Location
+            };
+
+            ToEntityCompany = x => new Company
+            {
+                Name = x.CompanyName,
+                DisplayName = x.CompanyDisplayName,
+                Fax = x.Fax,
+                MoreInformation = x.CompanyMoreInformation, 
+                Location = x.CompanyLocation, 
+                //Mails = x.CompanyMails, 
+                //Phones = x.CompanyPhones
             };
         }
+
+        
+        //static UserRegisterRequestModel()
+        //{
+        //    ToEntityCompany = x => new Company
+        //    {
+        //        Name = x.CompanyName,
+        //        DisplayName = x.CompanyDisplayName,
+        //        Fax = x.SecondName,
+        //        MoreInformation = x.CompanyMoreInformation, 
+        //        Location = x.CompanyLocation, 
+        //        Mails = x.Mails, 
+        //        Phones = x.Phones
+        //    };
+        //}
     }
     
     [DataContract]
     public class UserRegisterResponseModel
     {
-        public static Func<User, UserRegisterResponseModel> FromEntity { get; set; }
-
-        [DataMember(Name = "FirstName")]
-        public string FirstName { get; set; }
-
-        [DataMember(Name = "LastName")]
-        public string LastName { get; set; }
+        public static Func<User, string[], string[],CompanyModel, UserRegisterResponseModel> FromEntity { get; set; }
 
         [DataMember(Name = "SessionKey")]
         public string SessionKey { get; set; }
 
+        [DataMember(Name = "Company")]
+        public CompanyModel Company { get; set; }
+
+        //[DataMember(Name = "Username")]
+        //public string Username { get; set; }
+
+        [DataMember(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [DataMember(Name = "SecondName")]
+        public string SecondName { get; set; }
+
+        [DataMember(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [DataMember(Name = "Mails")]
+        public ICollection<string> Mails { get; set; }
+
+        [DataMember(Name = "Phones")]
+        public ICollection<string> Phones { get; set; }
+
+        [DataMember(Name = "UserType")]
+        public UserType UserType { get; set; }
+
         static UserRegisterResponseModel()
         {
-            FromEntity = x => new UserRegisterResponseModel 
+            FromEntity = (u,m,p,c) => new UserRegisterResponseModel 
             {
-                FirstName = x.FirstName, 
-                LastName = x.LastName, 
-                SessionKey = x.SessionKey, 
+                FirstName = u.FirstName, 
+                SecondName = u.SecondName, 
+                LastName = u.LastName,
+                Mails = m, 
+                Phones = p,  
+                SessionKey = u.SessionKey,
+                UserType = u.UserType,
+                Company = c
+            };
+        }
+    }
+    
+    [DataContract]
+    public class CompanyModel
+    {
+        public static Func<Company, string[], string[], CompanyModel> FromEntity { get; set; }
+
+        [DataMember(Name = "Name")]
+        public string CompanyName { get; set; }
+
+        [DataMember(Name = "DisplayName")]
+        public string CompanyDisplayName { get; set; }
+
+        [DataMember(Name = "Fax")]
+        public string Fax { get; set; }
+
+        [DataMember(Name = "MoreInformation")]
+        public string CompanyMoreInformation { get; set; }
+
+        [DataMember(Name = "Location")]
+        public string CompanyLocation { get; set; }
+
+        [DataMember(Name = "Mails")]
+        public ICollection<string> CompanyMails { get; set; }
+
+        [DataMember(Name = "Phones")]
+        public ICollection<string> CompanyPhones { get; set; }
+
+        [DataMember(Name = "Type")]
+        public CompanyType CompanyType { get; set; }
+
+
+        static CompanyModel()
+        {
+            FromEntity = (x,m,p) => new CompanyModel 
+            {
+                CompanyName = x.Name, 
+                CompanyDisplayName = x.DisplayName, 
+                Fax = x.Fax, 
+                CompanyMoreInformation = x.MoreInformation, 
+                CompanyLocation = x.Location, 
+                CompanyMails = m, 
+                CompanyPhones = p, 
+                CompanyType = x.CompanyType, 
             };
         }
     }

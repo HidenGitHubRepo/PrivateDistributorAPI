@@ -44,8 +44,8 @@ namespace CodeFirst.Model
         public UserType UserType { get; set; }
 
 
-        public ICollection<string> Mails { get; set; }
-        public ICollection<string> Phones { get; set; }
+        public virtual ICollection<Email> Mails { get; set; }
+        public virtual ICollection<Phone> Phones { get; set; }
         public ICollection<string> MoreContacts { get; set; }
 
         public string Location { get; set; }
@@ -57,8 +57,8 @@ namespace CodeFirst.Model
         public User()
         {
             this.Cars = new HashSet<Car>();
-            this.Mails = new HashSet<string>();
-            this.Phones = new HashSet<string>();
+            this.Mails = new HashSet<Email>();
+            this.Phones = new HashSet<Phone>();
             this.MoreContacts = new HashSet<string>();
         }
     } 

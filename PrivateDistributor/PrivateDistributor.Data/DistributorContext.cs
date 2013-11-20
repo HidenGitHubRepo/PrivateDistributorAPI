@@ -22,6 +22,8 @@ namespace PrivateDistributor.Data
         public DbSet<   NewUserAuthCode >   NewUserAuthCodes    { get; set; }
         public DbSet<   Product         >   Products            { get; set; }
         public DbSet<   Order           >   Orders              { get; set; }
+        public DbSet<   Phone           >   Phones              { get; set; }
+        public DbSet<   Email            >   Mails               { get; set; }
 
         /*
 

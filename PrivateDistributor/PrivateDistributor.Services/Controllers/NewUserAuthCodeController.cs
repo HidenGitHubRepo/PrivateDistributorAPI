@@ -152,7 +152,7 @@ namespace PrivateDistributor.Services.Controllers
                             {
                                 DisplayName = codeModel.Company,
                                 Name = codeModel.Company,
-                                Mails = codeModel.Email,
+                                //Mails = codeModel.Email,
                                 CompanyType = CompanyType.Client
                             };
                             this.unitOfWork.companyRepository.Add(isCompanyExist);
@@ -193,7 +193,7 @@ namespace PrivateDistributor.Services.Controllers
                             {
                                 DisplayName = codeModel.Company,
                                 Name = codeModel.Company,
-                                Mails = codeModel.Email,
+                                //Mails = codeModel.Email,
                                 CompanyType = CompanyType.Client
                             };
                             this.unitOfWork.companyRepository.Add(isCompanyExist);

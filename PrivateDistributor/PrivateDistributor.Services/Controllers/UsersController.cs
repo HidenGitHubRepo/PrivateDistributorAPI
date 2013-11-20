@@ -37,8 +37,8 @@ namespace PrivateDistributor.Services.Controllers
                     Username = x.Username,
                     DisplayName = x.LastName,
                     Location = x.Location,
-                    Mails = x.Mails,
-                    Phones = x.Phones,
+                    //Mails = x.Mails,
+                    //Phones = x.Phones,
                     UserType = x.UserType,
                 });
 
@@ -68,8 +68,8 @@ namespace PrivateDistributor.Services.Controllers
                     Username = selectedUser.Username,
                     DisplayName = selectedUser.LastName,
                     Location = selectedUser.Location,
-                    Mails = selectedUser.Mails,
-                    Phones = selectedUser.Phones,
+                    //Mails = selectedUser.Mails,
+                    //Phones = selectedUser.Phones,
                     UserType = selectedUser.UserType,
                     Cars = (from car in selectedUser.Cars
                             select new CarModel()
@@ -94,7 +94,7 @@ namespace PrivateDistributor.Services.Controllers
 
         [HttpPost]
         [ActionName("login")]
-        public UserLoginResponseModel Login([FromBody] UserLoginRequestModel userModel)
+        public HttpResponseMessage Login([FromBody] UserLoginRequestModel userModel)
         {
             var responseMessage = this.TryExecuteOperation(() =>
             {
@@ -110,7 +110,17 @@ namespace PrivateDistributor.Services.Controllers
                     this.unitOfWork.userRepository.Update(user.Id, user);
                 }
 
-                return UserLoginResponseModel.FromEntity(user);
+                var asd = unitOfWork.companyRepository.All().SingleOrDefault(x => x.Id == user.Company.Id);
+
+                var response = this.Request.CreateResponse(HttpStatusCode.OK,
+                    UserRegisterResponseModel.FromEntity(   user,
+                                                            user.Mails.Select(x => x.Name).ToArray(), 
+                                                            user.Phones.Select(x => x.Number).ToArray(),
+                                                            CompanyModel.FromEntity(user.Company,
+                                                                                    user.Company.Mails.Select(x => x.Name).ToArray(), 
+                                                                                    user.Company.Phones.Select(x => x.Number).ToArray())));
+                return response;
+                //return UserLoginResponseModel.FromEntity(user);
             });
 
             return responseMessage;
@@ -139,24 +149,61 @@ namespace PrivateDistributor.Services.Controllers
                     throw new InvalidOperationException("The Authification code is already used!");
                 }
 
-
                 User user = UserRegisterRequestModel.ToEntity(userModel);
                 user.Username = doesCodeExist.Email;
                 user.UserType = doesCodeExist.Type;
 
-                if (user.UserType == UserType.Administrator)
+                UserValidator.ValidateEmail(user.Username);
+                UserValidator.ValidateName(user.FirstName);
+                UserValidator.ValidateName(user.SecondName);
+                UserValidator.ValidateName(user.LastName);
+
+                //validate all emails (here and in company)
+
+                if (user.UserType == UserType.Administrator ||
+                    user.UserType == UserType.Dealer)
                 {
                     var isFirstAdminUser = this.unitOfWork.userRepository.All()
                               .FirstOrDefault(
                                               x =>
                                               x.UserType == UserType.Administrator);
-                    if (isFirstAdminUser == null)
+                    if (isFirstAdminUser == null &&
+                        user.UserType == UserType.Dealer)
                     {
-                        Company newCompany = new Company()
+                        throw new InvalidOperationException("First user can not be a Dealer!");
+                    }
+                    else if (isFirstAdminUser == null)
+                    {
+                        Company newCompany = UserRegisterRequestModel.ToEntityCompany(userModel);
+
+                        foreach (string phone in userModel.CompanyPhones)
                         {
-                            DisplayName = userModel.Company,
-                            Name = userModel.Company
-                        };
+                            var newPhone = new Phone()
+                            {
+                                Number = phone
+                            };
+                            unitOfWork.phoneRepository.Add(newPhone);
+
+                            newCompany.Phones.Add(newPhone);
+                        }
+
+                        foreach (string mail in userModel.CompanyMails)
+                        {
+                            var newEmail = new Email()
+                            {
+                                Name = mail
+                            };
+                            unitOfWork.emailRepository.Add(newEmail);
+
+                            newCompany.Mails.Add(newEmail);
+                        }
+                        //Company newCompany = new Company()
+                        //{
+                        //    DisplayName = userModel.CompanyDisplayName,
+                        //    Name = userModel.CompanyName,
+                        //    CompanyType = CompanyType.Owner,
+                        //    Fax = userModel.Fax
+                        //};
                         unitOfWork.companyRepository.Add(newCompany);
                         user.Company = newCompany;
                     }
@@ -170,21 +217,39 @@ namespace PrivateDistributor.Services.Controllers
                     user.Company = doesCodeExist.Company;
                 }
 
-                UserValidator.ValidateEmail(user.Username);
-                UserValidator.ValidateName(user.FirstName);
-                UserValidator.ValidateName(user.SecondName);
-                UserValidator.ValidateName(user.LastName);
-
                 var doesUserExist =
                     this.unitOfWork.userRepository.All()
                               .FirstOrDefault(
                                               x =>
                                               x.Username.ToLower() == user.Username.ToLower());
-                                              //||
-                                              //x.DisplayName.ToLower() == user.DisplayName.ToLower());
+                //||
+                //x.DisplayName.ToLower() == user.DisplayName.ToLower());
                 if (doesUserExist != null)
                 {
                     throw new InvalidOperationException("User already exist in the database!");
+                }
+
+
+                foreach (string phone in userModel.Phones)
+                {
+                    var newPhone = new Phone()
+                    {
+                        Number = phone
+                    };
+                    unitOfWork.phoneRepository.Add(newPhone);
+
+                    user.Phones.Add(newPhone);
+                }
+
+                foreach (string mail in userModel.Mails)
+                {
+                    var newEmail = new Email()
+                    {
+                        Name = mail
+                    };
+                    unitOfWork.emailRepository.Add(newEmail);
+
+                    user.Mails.Add(newEmail);
                 }
 
                 //register all new users as clients
@@ -193,7 +258,14 @@ namespace PrivateDistributor.Services.Controllers
                 user.SessionKey = SessionGenerator.GenerateSessionKey(user.Id);
                 this.unitOfWork.userRepository.Update(user.Id, user);
 
-                var response = this.Request.CreateResponse(HttpStatusCode.Created, UserRegisterResponseModel.FromEntity(user));
+                var response = this.Request.CreateResponse(HttpStatusCode.Created,
+                    UserRegisterResponseModel.FromEntity(   user,
+                                                            user.Mails.Select(x => x.Name).ToArray(), 
+                                                            user.Phones.Select(x => x.Number).ToArray(),
+                                                            CompanyModel.FromEntity(user.Company,
+                                                                                    user.Company.Mails.Select(x => x.Name).ToArray(), 
+                                                                                    user.Company.Phones.Select(x => x.Number).ToArray())));
+
                 return response;
             });
 

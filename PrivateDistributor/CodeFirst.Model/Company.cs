@@ -27,16 +27,16 @@ namespace CodeFirst.Model
         public string MoreInformation { get; set; }
         public string Location { get; set; }
 
-        public string Mails { get; set; }
-        public string Phones { get; set; }
+        public virtual ICollection<Email> Mails { get; set; }
+        public virtual ICollection<Phone> Phones { get; set; }
         public virtual ICollection<User> Users { get; set; }
 
         public CompanyType CompanyType { get; set; }
 
         public Company()
         {
-            //this.Mails = new string();
-            //this.Phones = new HashSet<string>();
+            this.Mails = new HashSet<Email>();
+            this.Phones = new HashSet<Phone>();
             this.Users = new HashSet<User>();
         }
     }
