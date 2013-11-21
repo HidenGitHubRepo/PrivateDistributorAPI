@@ -176,7 +176,7 @@ namespace PrivateDistributor.Services.Controllers
                     {
                         Company newCompany = UserRegisterRequestModel.ToEntityCompany(userModel);
 
-                        foreach (string phone in userModel.CompanyPhones)
+                        foreach (string phone in userModel.CompanyData.CompanyPhones)
                         {
                             var newPhone = new Phone()
                             {
@@ -187,7 +187,7 @@ namespace PrivateDistributor.Services.Controllers
                             newCompany.Phones.Add(newPhone);
                         }
 
-                        foreach (string mail in userModel.CompanyMails)
+                        foreach (string mail in userModel.CompanyData.CompanyMails)
                         {
                             var newEmail = new Email()
                             {

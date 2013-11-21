@@ -121,6 +121,10 @@ namespace PrivateDistributor.Services.Models
 
         public UserType UserType { get; set; }
 
+        
+        //[DataMember(Name = "Company")]
+        public CompanyModel CompanyData { get; set; }
+
         public string CompanyName { get; set; }
 
         public string CompanyDisplayName { get; set; }
@@ -149,14 +153,24 @@ namespace PrivateDistributor.Services.Models
                 //Location = x.Location
             };
 
-            ToEntityCompany = x => new Company
+            //ToEntityCompany = x => new Company
+            //{
+            //    Name = x.CompanyName,
+            //    DisplayName = x.CompanyDisplayName,
+            //    Fax = x.Fax,
+            //    MoreInformation = x.CompanyMoreInformation, 
+            //    Location = x.CompanyLocation, 
+            //    //Mails = x.CompanyMails, 
+            //    //Phones = x.CompanyPhones
+            //};
+             ToEntityCompany = x => new Company
             {
-                Name = x.CompanyName,
-                DisplayName = x.CompanyDisplayName,
-                Fax = x.Fax,
-                MoreInformation = x.CompanyMoreInformation, 
-                Location = x.CompanyLocation, 
-                //Mails = x.CompanyMails, 
+                Name = x.CompanyData.CompanyName,
+                DisplayName = x.CompanyData.CompanyDisplayName,
+                Fax = x.CompanyData.Fax,
+                MoreInformation = x.CompanyData.CompanyMoreInformation, 
+                Location = x.CompanyData.CompanyLocation, 
+                //Mails = x.CompanyData.CompanyMails, 
                 //Phones = x.CompanyPhones
             };
         }
