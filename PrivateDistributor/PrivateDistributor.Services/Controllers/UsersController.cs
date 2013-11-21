@@ -182,7 +182,7 @@ namespace PrivateDistributor.Services.Controllers
                             {
                                 Number = phone
                             };
-                            unitOfWork.phoneRepository.Add(newPhone);
+                            //unitOfWork.phoneRepository.Add(newPhone);
 
                             newCompany.Phones.Add(newPhone);
                         }
@@ -193,7 +193,7 @@ namespace PrivateDistributor.Services.Controllers
                             {
                                 Name = mail
                             };
-                            unitOfWork.emailRepository.Add(newEmail);
+                            //unitOfWork.emailRepository.Add(newEmail);
 
                             newCompany.Mails.Add(newEmail);
                         }
@@ -204,7 +204,7 @@ namespace PrivateDistributor.Services.Controllers
                         //    CompanyType = CompanyType.Owner,
                         //    Fax = userModel.Fax
                         //};
-                        unitOfWork.companyRepository.Add(newCompany);
+                        //unitOfWork.companyRepository.Add(newCompany);
                         user.Company = newCompany;
                     }
                     else
@@ -236,7 +236,7 @@ namespace PrivateDistributor.Services.Controllers
                     {
                         Number = phone
                     };
-                    unitOfWork.phoneRepository.Add(newPhone);
+                    //unitOfWork.phoneRepository.Add(newPhone);
 
                     user.Phones.Add(newPhone);
                 }
@@ -247,16 +247,25 @@ namespace PrivateDistributor.Services.Controllers
                     {
                         Name = mail
                     };
-                    unitOfWork.emailRepository.Add(newEmail);
+                    //unitOfWork.emailRepository.Add(newEmail);
 
                     user.Mails.Add(newEmail);
                 }
 
                 //register all new users as clients
                 //user.UserType = UserType.Client;
-                this.unitOfWork.userRepository.Add(user);
+
+                //this.unitOfWork.userRepository.Add(user);
                 user.SessionKey = SessionGenerator.GenerateSessionKey(user.Id);
-                this.unitOfWork.userRepository.Update(user.Id, user);
+                //this.unitOfWork.userRepository.Update(user.Id, user);
+
+                doesCodeExist.IsUsed = true;
+                if (doesCodeExist.NewUser == null)
+                {
+                    doesCodeExist.NewUser = user;
+                }
+                //this.unitOfWork.newUserAuthCodeRepository.Update(doesCodeExist.Id, doesCodeExist);
+
 
                 var response = this.Request.CreateResponse(HttpStatusCode.Created,
                     UserRegisterResponseModel.FromEntity(   user,
