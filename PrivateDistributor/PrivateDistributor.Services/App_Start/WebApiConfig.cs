@@ -10,6 +10,16 @@ namespace PrivateDistributor.Services
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
+               name: "ProductsApi",
+               routeTemplate: "api/Products/{action}/{id}",
+               defaults: new
+               {
+                   controller = "Products",
+                   id = RouteParameter.Optional
+               }
+            );
+
+            config.Routes.MapHttpRoute(
                name: "NewUserAuthCodeApi",
                routeTemplate: "api/NewUserAuthCodeCheck/{action}/{id}",
                defaults: new

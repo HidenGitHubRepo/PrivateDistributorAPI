@@ -46,9 +46,9 @@ namespace CodeFirst.Model
 
         public virtual ICollection<Email> Mails { get; set; }
         public virtual ICollection<Phone> Phones { get; set; }
-        public ICollection<string> MoreContacts { get; set; }
+        //public string MoreContacts { get; set; }
 
-        public string Location { get; set; }
+        //public string Location { get; set; }
 
         public virtual Company Company { get; set; }
 
@@ -59,7 +59,7 @@ namespace CodeFirst.Model
             this.Cars = new HashSet<Car>();
             this.Mails = new HashSet<Email>();
             this.Phones = new HashSet<Phone>();
-            this.MoreContacts = new HashSet<string>();
+            //this.MoreContacts = new HashSet<string>();
         }
     } 
 }
